@@ -1,0 +1,84 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-07-05T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v13.0.2",
+  "resources": [
+    {
+      "_id": "wrk_agenda_api_cron",
+      "_type": "workspace",
+      "name": "Agenda API - Teste Cron",
+      "description": "Colecao para validar disparo de cron e marcacao de email enviado"
+    },
+    {
+      "_id": "env_agenda_api_cron",
+      "_type": "environment",
+      "parentId": "wrk_agenda_api_cron",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "usuario_id": 1,
+        "compromisso_id": 1,
+        "data_hora_teste": "2026-07-05 23:00:00"
+      }
+    },
+    {
+      "_id": "fld_cron",
+      "_type": "request_group",
+      "parentId": "wrk_agenda_api_cron",
+      "name": "01 - Fluxo Cron"
+    },
+    {
+      "_id": "req_cron_criar_compromisso",
+      "_type": "request",
+      "parentId": "fld_cron",
+      "name": "POST - Criar compromisso para cron",
+      "method": "POST",
+      "url": "{{ base_url }}/compromissos",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuario_id\": {{ usuario_id }},\n  \"titulo\": \"Lembrete Cron Insomnia\",\n  \"descricao\": \"Teste automatico de envio por cron\",\n  \"data_hora\": \"{{ data_hora_teste }}\"\n}"
+      }
+    },
+    {
+      "_id": "req_cron_listar_usuario",
+      "_type": "request",
+      "parentId": "fld_cron",
+      "name": "GET - Listar compromissos do usuario",
+      "method": "GET",
+      "url": "{{ base_url }}/compromissos/usuario/{{ usuario_id }}",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_cron_disparo_manual",
+      "_type": "request",
+      "parentId": "fld_cron",
+      "name": "POST - Disparo manual do cron",
+      "method": "POST",
+      "url": "{{ base_url }}/compromissos/teste-cron",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_cron_buscar_id",
+      "_type": "request",
+      "parentId": "fld_cron",
+      "name": "GET - Buscar compromisso por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/compromissos/{{ compromisso_id }}",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    }
+  ]
+}

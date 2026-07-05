@@ -1,0 +1,126 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-07-05T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v13.0.2",
+  "resources": [
+    {
+      "_id": "wrk_agenda_api",
+      "_type": "workspace",
+      "name": "Agenda API - Testes Rapidos",
+      "description": "Colecao de smoke test para validar API local rapidamente"
+    },
+    {
+      "_id": "env_agenda_api_base",
+      "_type": "environment",
+      "parentId": "wrk_agenda_api",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "email_teste": "ive1000@hotmail.com",
+        "senha_teste": "123456",
+        "usuario_id": 1,
+        "compromisso_id": 1
+      }
+    },
+    {
+      "_id": "fld_smoke",
+      "_type": "request_group",
+      "parentId": "wrk_agenda_api",
+      "name": "01 - Smoke Test"
+    },
+    {
+      "_id": "req_usuarios_listar",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "GET - Listar usuarios",
+      "method": "GET",
+      "url": "{{ base_url }}/usuarios",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_usuarios_email",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "GET - Teste de e-mail",
+      "method": "GET",
+      "url": "{{ base_url }}/usuarios/teste-email",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "POST - Login",
+      "method": "POST",
+      "url": "{{ base_url }}/login",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ email_teste }}\",\n  \"senha\": \"{{ senha_teste }}\"\n}"
+      }
+    },
+    {
+      "_id": "req_compromissos_listar",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "GET - Listar compromissos",
+      "method": "GET",
+      "url": "{{ base_url }}/compromissos",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_compromissos_usuario",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "GET - Compromissos por usuario",
+      "method": "GET",
+      "url": "{{ base_url }}/compromissos/usuario/{{ usuario_id }}",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_compromisso_por_id",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "GET - Compromisso por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/compromissos/{{ compromisso_id }}",
+      "parameters": [],
+      "headers": [],
+      "body": {}
+    },
+    {
+      "_id": "req_criar_compromisso",
+      "_type": "request",
+      "parentId": "fld_smoke",
+      "name": "POST - Criar compromisso",
+      "method": "POST",
+      "url": "{{ base_url }}/compromissos",
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuario_id\": {{ usuario_id }},\n  \"titulo\": \"Teste rapido Insomnia\",\n  \"descricao\": \"Validacao da API\",\n  \"data_hora\": \"2026-07-05 23:00:00\"\n}"
+      }
+    }
+  ]
+}
